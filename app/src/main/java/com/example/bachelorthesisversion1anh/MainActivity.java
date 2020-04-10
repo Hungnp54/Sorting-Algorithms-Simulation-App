@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     RadioGroup radioSelection, radioView;
     EditText numberOfElement;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         //BUTTON
         generateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,10 +82,14 @@ public class MainActivity extends AppCompatActivity {
                     int number = Integer.parseInt(numberElement);
                     if(tmp2==1){
                         Intent intent = new Intent(MainActivity.this, portaitView.class);
+                        intent.putExtra("number element",number);
+                        intent.putExtra("sorting alogrithm", tmp1);
                         startActivity(intent);
                     }
                     else{
                         Intent intent = new Intent(MainActivity.this, landscapeView.class);
+                        intent.putExtra("number element",number);
+                        intent.putExtra("sorting alogrithm", tmp1);
                         startActivity(intent);
                     }
                 }
@@ -90,4 +97,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
