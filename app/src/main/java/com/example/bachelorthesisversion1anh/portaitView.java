@@ -24,12 +24,45 @@ public class portaitView extends AppCompatActivity {
         portraitView = (LinearLayout) findViewById(R.id.portraitView);
         startButton = (Button) findViewById(R.id.portraitStartButton);
         int numberElement = getIntent().getIntExtra("number element",1);
-        int sortingAl = getIntent().getIntExtra("sorting alogrithm",1);
+        final int sortingAl = getIntent().getIntExtra("sorting alogrithm",1);
+        //DRAW VIEW
         int scrHeight = (screenDemension.getScreenHeight())/4*3-200;
         arr = sortingAlogrithms.generateArrayValue(scrHeight,numberElement);
         int viewWidth = (screenDemension.getScreenWidth())/arr.length-1;
         drawViews(arr,viewWidth);
+        //
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        switch(sortingAl) {
+                            case 1:
+                                sortingAlogrithms.quickSort(arr, 0, arr.length - 1, portraitView);
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                break;
+                        }
+                    }
+                });
+                thread.start();
+                startButton.setVisibility(View.GONE);
+            }
+        });
     }
+
+
+
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void drawViews(int[] viewHeight, int viewWidth){
         for(int i=0; i<viewHeight.length; i++){
