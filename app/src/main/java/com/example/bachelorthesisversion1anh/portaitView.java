@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class portaitView extends AppCompatActivity {
+public class portaitView extends sortingAlogrithms {
    private LinearLayout portraitView;
    private Button startButton;
     int[] arr;
@@ -27,41 +27,18 @@ public class portaitView extends AppCompatActivity {
         final int sortingAl = getIntent().getIntExtra("sorting alogrithm",1);
         //DRAW VIEW
         int scrHeight = (screenDemension.getScreenHeight())/4*3-200;
-        arr = sortingAlogrithms.generateArrayValue(scrHeight,numberElement);
+        arr = generateArrayValue(scrHeight,numberElement);
         int viewWidth = (screenDemension.getScreenWidth())/arr.length-1;
         drawViews(arr,viewWidth);
         //
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        switch(sortingAl) {
-                            case 1:
-                                sortingAlogrithms.quickSort(arr, 0, arr.length - 1, portraitView);
-                                break;
-                            case 2:
-                                break;
-                            case 3:
-                                break;
-                            case 4:
-                                break;
-                            case 5:
-                                break;
-                        }
-                    }
-                });
-                thread.start();
+                testDemo(1,arr, 0,arr.length-1, portraitView);
                 startButton.setVisibility(View.GONE);
             }
         });
     }
-
-
-
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void drawViews(int[] viewHeight, int viewWidth){

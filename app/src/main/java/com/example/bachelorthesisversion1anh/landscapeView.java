@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class landscapeView extends AppCompatActivity {
+public class landscapeView extends sortingAlogrithms {
     private LinearLayout landscapeView, landscapeCode;
     private Button lsStart;
     int[] arr;
@@ -29,7 +29,7 @@ public class landscapeView extends AppCompatActivity {
         int numberElement = getIntent().getIntExtra("number element",1);
         int sortingAl = getIntent().getIntExtra("sorting alogrithm",1);
         int scrHeight = screenDemension.getScreenHeight()-200;
-        arr = sortingAlogrithms.generateArrayValue(scrHeight,numberElement);
+        arr = generateArrayValue(scrHeight,numberElement);
         int viewWidth = (screenDemension.getScreenWidth())/(2*arr.length)-1;
         drawViews(arr,viewWidth);
     }
