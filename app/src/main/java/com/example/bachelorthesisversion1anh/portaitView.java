@@ -34,7 +34,7 @@ public class portaitView extends sortingAlogrithms {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testDemo(1,arr, 0,arr.length-1, portraitView);
+                testDemo(sortingAl,arr, 0,arr.length-1, portraitView);
                 startButton.setVisibility(View.GONE);
             }
         });

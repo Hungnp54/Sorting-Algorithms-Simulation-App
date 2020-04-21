@@ -27,11 +27,19 @@ public class landscapeView extends sortingAlogrithms {
         lsStart = (Button) findViewById(R.id.lsStartButton);
 
         int numberElement = getIntent().getIntExtra("number element",1);
-        int sortingAl = getIntent().getIntExtra("sorting alogrithm",1);
+        final int sortingAl = getIntent().getIntExtra("sorting alogrithm",1);
         int scrHeight = screenDemension.getScreenHeight()-200;
         arr = generateArrayValue(scrHeight,numberElement);
         int viewWidth = (screenDemension.getScreenWidth())/(2*arr.length)-1;
         drawViews(arr,viewWidth);
+
+        lsStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testDemo(sortingAl, arr, 0, arr.length-1, landscapeView);
+                lsStart.setVisibility(View.GONE);
+            }
+        });
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void drawViews(int[] viewHeight, int viewWidth) {
