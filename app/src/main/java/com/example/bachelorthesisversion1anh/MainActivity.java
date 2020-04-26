@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.quickSort:
                         tmp1 = 1;
                         break;
-                    case  R.id.selectGroup:
+                    case  R.id.selectionSort:
                         tmp1 = 2;
                         break;
                     case R.id.mergeSort:

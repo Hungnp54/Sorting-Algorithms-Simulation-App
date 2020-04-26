@@ -1,6 +1,7 @@
 package com.example.bachelorthesisversion1anh;
 
 import android.graphics.Color;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,10 +26,15 @@ public class sortingAlogrithms extends AppCompatActivity {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                if(method == 1)
-                    quickSort(arr, left, right, currentView);
-                else
-                    Toast.makeText(sortingAlogrithms.this,"Wrong",Toast.LENGTH_SHORT).show();
+                switch (method) {
+                    case 1:
+                        quickSort(arr, left, right, currentView);
+                        break;
+                    case 2:
+                        selectionSort(arr, currentView);
+                        break;
+                }
+
             }
         });
         thread.start();
@@ -58,7 +64,7 @@ public class sortingAlogrithms extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
+               // swapNumber(arr[i],arr[j]);
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
@@ -79,7 +85,36 @@ public class sortingAlogrithms extends AppCompatActivity {
             quickSort(arr, i, right, currentView);
 
     }
+    public void selectionSort(int[] arr, LinearLayout currentView){
+        int tmp = arr.length;
+        for (int i=0; i < tmp-1; i++){
+            int min = i;
+            for(int j=i+1 ; j < tmp ; j++ )
+                if(arr[j] < arr[min])
+                    min = j;
 
+                if(i!=min) {
+                    //swapNumber(arr[i], arr[min]);
+                    highLight(i, true,currentView);
+                    highLight(min, true,currentView);
+
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    int temp = arr[i];
+                    arr[i] = arr[min];
+                    arr[min] = temp;
+                    highLight(i, false,currentView);
+                    highLight(min, false,currentView);
+                    swapView(i, min, currentView);
+                }
+
+
+        }
+
+    }
 
     public void swapView(final int index1, final int index2, final LinearLayout currentView){
         runOnUiThread(new Runnable() {
@@ -87,15 +122,15 @@ public class sortingAlogrithms extends AppCompatActivity {
             public void run() {
                 View view1 = currentView.getChildAt(index1);
                 View view2 = currentView.getChildAt(index2);
-
+// create a copy of current view
                 int childCount = currentView.getChildCount();
                 View[] children = new View[childCount];
                 for (int i = 0; i < childCount; i++) {
                     children[i] = currentView.getChildAt(i);
                 }
-
+// remove the old view
                 currentView.removeAllViews();
-
+//add the new one to the screen
                 for (int i = 0; i < childCount; i++) {
                     if (i == index1) {
                         currentView.addView(view2);
