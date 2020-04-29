@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class portaitView extends sortingAlogrithms {
+public class portaitView extends sortingAlgorithms {
    private LinearLayout portraitView;
    private Button startButton;
     int[] arr;

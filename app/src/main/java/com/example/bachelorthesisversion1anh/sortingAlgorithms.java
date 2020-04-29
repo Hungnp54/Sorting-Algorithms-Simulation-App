@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
-public class sortingAlogrithms extends AppCompatActivity {
+public class sortingAlgorithms extends AppCompatActivity {
     public int[] generateArrayValue(int layoutHeight, int numberElement){
         int[] arrayValue = new int[numberElement];
         int min = 10;
@@ -33,6 +33,9 @@ public class sortingAlogrithms extends AppCompatActivity {
                     case 2:
                         selectionSort(arr, currentView);
                         break;
+                    case 3:
+                        mergeSort(arr, left, right, currentView);
+                        break;
                 }
 
             }
@@ -40,6 +43,8 @@ public class sortingAlogrithms extends AppCompatActivity {
         thread.start();
     }
 
+
+    //Sorting Algorithms
     public void quickSort(int[] arr, int left, int right, LinearLayout currentView){
         if(arr==null || arr.length == 0)
             return;
@@ -89,11 +94,11 @@ public class sortingAlogrithms extends AppCompatActivity {
         int tmp = arr.length;
         for (int i=0; i < tmp-1; i++){
             int min = i;
-            for(int j=i+1 ; j < tmp ; j++ )
-                if(arr[j] < arr[min])
+            for(int j=i+1 ; j < tmp ; j++ ) {
+                if (arr[j] < arr[min])
                     min = j;
+            }
 
-                if(i!=min) {
                     //swapNumber(arr[i], arr[min]);
                     highLight(i, true,currentView);
                     highLight(min, true,currentView);
@@ -109,13 +114,86 @@ public class sortingAlogrithms extends AppCompatActivity {
                     highLight(i, false,currentView);
                     highLight(min, false,currentView);
                     swapView(i, min, currentView);
-                }
+
 
 
         }
 
     }
 
+    public void mergeSort(int[] arr, int left, int right, LinearLayout currentView){
+        if(left<right){
+            int middle = (left+right)/2;
+            mergeSort(arr, left, middle, currentView);
+            mergeSort(arr,middle+1, right, currentView);
+            merge(arr,left,middle,right,currentView);
+        }
+    }
+    public void merge(int[] arr, int left, int middle, int right, LinearLayout currentView){
+        int[] arrTemp = new int[right-left+1];
+        int i, j, k =0;
+        i = left;
+        j=middle+1;
+
+        while((i<middle+1)&&(j<right+1)){
+            if(arr[i]<arr[j]){
+                highLight(i, true,currentView);
+                highLight(j, true,currentView);
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                arrTemp[k] = arr[i];
+
+                k++;
+                i++;
+
+            }
+            else{
+
+                highLight(i, true,currentView);
+                highLight(j, true,currentView);
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                arrTemp[k]=arr[j];
+
+                swapView(i, j, currentView);
+                highLight(i, false,currentView);
+                highLight(j, false,currentView);
+                k++;
+                j++;
+            }
+        }
+
+        while(i<middle+1){
+            arrTemp[k]=arr[i];
+            k++;
+            i++;
+        }
+        while(j<right+1){
+            arrTemp[k]=arr[j];
+            k++;
+            j++;
+        }
+        i = left;
+        for(k=0; k<(right-left+1); k++){
+            arr[i] = arrTemp[k];
+            i++;
+        }
+    }
+
+
+
+
+
+
+    //support Methods
     public void swapView(final int index1, final int index2, final LinearLayout currentView){
         runOnUiThread(new Runnable() {
             @Override
@@ -156,4 +234,6 @@ public class sortingAlogrithms extends AppCompatActivity {
         });
 
     }
+
+
 }

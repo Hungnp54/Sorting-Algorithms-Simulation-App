@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class landscapeView extends sortingAlogrithms {
+public class landscapeView extends sortingAlgorithms {
     private LinearLayout landscapeView, landscapeCode;
     private Button lsStart;
     int[] arr;
