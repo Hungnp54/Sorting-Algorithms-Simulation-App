@@ -114,9 +114,6 @@ public class sortingAlgorithms extends AppCompatActivity {
                     highLight(i, false,currentView);
                     highLight(min, false,currentView);
                     swapView(i, min, currentView);
-
-
-
         }
 
     }
@@ -129,63 +126,51 @@ public class sortingAlgorithms extends AppCompatActivity {
             merge(arr,left,middle,right,currentView);
         }
     }
-    public void merge(int[] arr, int left, int middle, int right, LinearLayout currentView){
-        int[] arrTemp = new int[right-left+1];
-        int i, j, k =0;
-        i = left;
-        j=middle+1;
+    public void merge(final int[] arr, final int left, final int middle, final int right, final LinearLayout currentView){
 
-        while((i<middle+1)&&(j<right+1)){
-            if(arr[i]<arr[j]){
-                highLight(i, true,currentView);
-                highLight(j, true,currentView);
+                int[] arrTemp = new int[right-left+1];
+                int[] viewTemp = new int[right-left+1];
+                int i, j, k =0;
+                i = left;
+                j=middle+1;
 
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                while((i<middle+1)&&(j<right+1)){
+                    if(arr[i]<arr[j]){
+                        arrTemp[k] = arr[i];
+                        viewTemp[k] = i;
+                        k++;
+                        i++;
+
+                    }
+                    else{
+                        arrTemp[k]=arr[j];
+                        viewTemp[k] = j;
+
+                        k++;
+                        j++;
+                    }
                 }
-                arrTemp[k] = arr[i];
 
-                k++;
-                i++;
-
-            }
-            else{
-
-                highLight(i, true,currentView);
-                highLight(j, true,currentView);
-
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                while(i<middle+1){
+                    arrTemp[k]=arr[i];
+                    viewTemp[k] = i;
+                    k++;
+                    i++;
                 }
-                arrTemp[k]=arr[j];
+                while(j<right+1){
+                    arrTemp[k]=arr[j];
+                    viewTemp[k] = j;
+                    k++;
+                    j++;
+                }
+                i = left;
+                for(k=0; k<(right-left+1); k++){
+                    arr[i] = arrTemp[k];
+                    i++;
+                }
+                addView(left, viewTemp,currentView);
 
-                swapView(i, j, currentView);
-                highLight(i, false,currentView);
-                highLight(j, false,currentView);
-                k++;
-                j++;
-            }
-        }
 
-        while(i<middle+1){
-            arrTemp[k]=arr[i];
-            k++;
-            i++;
-        }
-        while(j<right+1){
-            arrTemp[k]=arr[j];
-            k++;
-            j++;
-        }
-        i = left;
-        for(k=0; k<(right-left+1); k++){
-            arr[i] = arrTemp[k];
-            i++;
-        }
     }
 
 
@@ -233,6 +218,42 @@ public class sortingAlgorithms extends AppCompatActivity {
             }
         });
 
+    }
+    public void addView(final int position, final int[] arrView, final LinearLayout currentView){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//view temp
+                int n = arrView.length;
+                int k = 0;
+                int j = position;
+                View[] viewTemp = new View[n];
+                for (int i = 0; i < n; i++) {
+                    viewTemp[i] = currentView.getChildAt(arrView[i]);
+                }
+//make a copy of temp view
+                int childCount = currentView.getChildCount();
+                View[] children = new View[childCount];
+                for (int i = 0; i < childCount; i++) {
+                    children[i] = currentView.getChildAt(i);
+                }
+// remove the old view
+                currentView.removeAllViews();
+//add the new one to the screen
+                for (int i = 0; i < childCount; i++) {
+                    if (i == j && k < n) {
+                        currentView.addView(viewTemp[k]);
+                        j++;
+                        k++;
+                    }
+                     else {
+                        currentView.addView(children[i]);
+                    }
+                }
+                currentView.requestLayout();
+
+            }
+        });
     }
 
 
