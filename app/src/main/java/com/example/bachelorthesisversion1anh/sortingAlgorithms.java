@@ -36,6 +36,12 @@ public class sortingAlgorithms extends AppCompatActivity {
                     case 3:
                         mergeSort(arr, left, right, currentView);
                         break;
+                    case 4:
+                        bubbleSort(arr, currentView);
+                        break;
+                    case 5:
+                        insertionSort(arr, currentView);
+                        break;
                 }
 
             }
@@ -126,7 +132,7 @@ public class sortingAlgorithms extends AppCompatActivity {
             merge(arr,left,middle,right,currentView);
         }
     }
-    public void merge(final int[] arr, final int left, final int middle, final int right, final LinearLayout currentView){
+    public void merge(int[] arr, int left, int middle, int right, LinearLayout currentView){
 
                 int[] arrTemp = new int[right-left+1];
                 int[] viewTemp = new int[right-left+1];
@@ -145,7 +151,6 @@ public class sortingAlgorithms extends AppCompatActivity {
                     else{
                         arrTemp[k]=arr[j];
                         viewTemp[k] = j;
-
                         k++;
                         j++;
                     }
@@ -167,13 +172,87 @@ public class sortingAlgorithms extends AppCompatActivity {
                 for(k=0; k<(right-left+1); k++){
                     arr[i] = arrTemp[k];
                     i++;
+                    highLight(viewTemp[k], true,currentView);
                 }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for(k=0; k<(right-left+1); k++){
+
+            highLight(viewTemp[k], false,currentView);
+        }
+
                 addView(left, viewTemp,currentView);
-
-
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void insertionSort(int[] arr, LinearLayout currentView){
+        int i, key, j;
+        for (i = 1; i < arr.length; i++){
+            key = arr[i];
+            j = i - 1;
+            highLight(j, true,currentView);
+            highLight(j+1, true,currentView);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            while (j >= 0 && arr[j] > key){
+                arr[j + 1] = arr[j];
+                highLight(j, true,currentView);
+                highLight(j+1, true,currentView);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                swapView(j, j+1, currentView);
+                highLight(j, false,currentView);
+                highLight(j+1, false,currentView);
+                j--;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
+            highLight(j, false,currentView);
+            highLight(j+1, false,currentView);
+            arr[j + 1] = key;
+        }
+    }
+
+    public void bubbleSort(int[] arr, LinearLayout currentView){
+        int i, j;
+        int n = arr.length;
+        for (i = 0; i < n-1; i++)
+            // Last i elements are already in place
+            for (j = 0; j < n-i-1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    highLight(j, true,currentView);
+                    highLight(j+1, true,currentView);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    int tmp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = tmp;
+                    swapView(j, j+1, currentView);
+                    highLight(j, false,currentView);
+                    highLight(j+1, false,currentView);
+                }
+            }
+    }
 
 
 
@@ -217,7 +296,6 @@ public class sortingAlgorithms extends AppCompatActivity {
                     view.setBackgroundColor(isHighLight ? Color.RED : Color.GREEN);
             }
         });
-
     }
     public void addView(final int position, final int[] arrView, final LinearLayout currentView){
         runOnUiThread(new Runnable() {
@@ -251,10 +329,7 @@ public class sortingAlgorithms extends AppCompatActivity {
                     }
                 }
                 currentView.requestLayout();
-
             }
         });
     }
-
-
 }
