@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:paddingBottom="5dp"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
@@ -27,23 +27,19 @@
         android:id="@+id/landscapeCode"
         android:layout_weight="5"
         android:layout_toRightOf="@id/landscapeView"
-        android:gravity="bottom"
-
-        android:layout_centerHorizontal="true"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView"
+        <io.github.kbiakov.codeview.CodeView
+            android:id="@+id/code_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="35dp"
-            android:text="Hello Guys" />
+            android:layout_height="wrap_content"
+            app:animateOnStart="true" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center_vertical">
