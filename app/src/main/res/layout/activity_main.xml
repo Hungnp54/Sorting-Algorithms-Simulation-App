@@ -11,10 +11,10 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:textColor="#F6F7FA"
         android:layout_marginTop="18dp"
-        android:text="Select Sorting Alogrithm"
+        android:text="Select Sorting Algorithm"
+        android:textColor="#F6F7FA"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

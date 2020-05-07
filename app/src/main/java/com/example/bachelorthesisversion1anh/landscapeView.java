@@ -12,9 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import io.github.kbiakov.codeview.CodeView;
+import io.github.kbiakov.codeview.adapters.Options;
+import io.github.kbiakov.codeview.highlight.ColorTheme;
+import io.github.kbiakov.codeview.highlight.Font;
+
 public class landscapeView extends sortingAlgorithms {
     private LinearLayout landscapeView, landscapeCode;
     private Button lsStart;
+   // private CodeView codeView;
     int[] arr;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -22,8 +28,9 @@ public class landscapeView extends sortingAlgorithms {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landscape_view);
 
+        //codeView = (CodeView) findViewById(R.id.code_view);
         landscapeView = (LinearLayout) findViewById(R.id.landscapeView);
-        landscapeCode = (LinearLayout) findViewById(R.id.landscapeCode);
+        //landscapeCode = (LinearLayout) findViewById(R.id.landscapeCode);
         lsStart = (Button) findViewById(R.id.lsStartButton);
 
         int numberElement = getIntent().getIntExtra("number element",1);
@@ -36,7 +43,9 @@ public class landscapeView extends sortingAlgorithms {
         lsStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testDemo(sortingAl, arr, 0, arr.length-1, landscapeView);
+
+        testDemo(sortingAl, arr, 0, arr.length-1, landscapeView);
+
                 lsStart.setVisibility(View.GONE);
             }
         });
