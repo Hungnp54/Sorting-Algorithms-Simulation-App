@@ -36,7 +36,7 @@ public class landscapeView extends sortingAlgorithms {
         lsStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testDemo(sortingAl, arr, 0, arr.length-1, landscapeView);
+                testDemo(sortingAl, arr, 0, arr.length-1, landscapeView, landscapeCode);
                 lsStart.setVisibility(View.GONE);
             }
         });

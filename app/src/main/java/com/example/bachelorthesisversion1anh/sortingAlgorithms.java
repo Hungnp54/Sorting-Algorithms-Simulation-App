@@ -1,10 +1,12 @@
 package com.example.bachelorthesisversion1anh;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,25 +24,27 @@ public class sortingAlgorithms extends AppCompatActivity {
         return arrayValue;
     }
 
-    public void testDemo(final int method, final int[] arr, final int left, final int right, final LinearLayout currentView){
+    public void testDemo(final int method, final int[] arr, final int left, final int right, final LinearLayout currentView1, final LinearLayout currentView2){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 switch (method) {
                     case 1:
-                        quickSort(arr, left, right, currentView);
+
+                        quickSort(arr, left, right, currentView1);
                         break;
                     case 2:
-                        selectionSort(arr, currentView);
+                        selectionSort(arr, currentView1);
                         break;
                     case 3:
-                        mergeSort(arr, left, right, currentView);
+                        mergeSort(arr, left, right, currentView1);
                         break;
                     case 4:
-                        bubbleSort(arr, currentView);
+                        addBubbleSortCode(currentView2);
+                        bubbleSort(arr, currentView1, currentView2);
                         break;
                     case 5:
-                        insertionSort(arr, currentView);
+                        insertionSort(arr, currentView1);
                         break;
                 }
 
@@ -230,7 +234,7 @@ public class sortingAlgorithms extends AppCompatActivity {
         }
     }
 
-    public void bubbleSort(int[] arr, LinearLayout currentView){
+    public void bubbleSort(int[] arr, LinearLayout currentView, LinearLayout currentView2){
         int i, j;
         int n = arr.length;
         for (i = 0; i < n-1; i++)
@@ -239,23 +243,46 @@ public class sortingAlgorithms extends AppCompatActivity {
                 if (arr[j] > arr[j + 1]) {
                     highLight(j, true,currentView);
                     highLight(j+1, true,currentView);
+                    highLightCode(2,true,currentView2);
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    highLightCode(2,false,currentView2);
+                    highLightCode(3,true,currentView2);
                     int tmp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = tmp;
                     swapView(j, j+1, currentView);
                     highLight(j, false,currentView);
                     highLight(j+1, false,currentView);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    highLightCode(3,false,currentView2);
                 }
             }
     }
 
+    @SuppressLint("SetTextI18n")
+    public void addBubbleSortCode(LinearLayout currentView){
+        TextView tView1 = new TextView(this);
+        tView1.setText(" "+"int i, j;\n"+"int n = arr.length;\n"+"// Last i elements are already in place\n"+"for (i = 0; i < n-1; i++)");
+        currentView.addView(tView1);
+        TextView tView2 = new TextView(this);
+        tView2.setText(" "+"\tfor (j = 0; j < n-i-1; j++) {\n" +
+                "                if (arr[j] > arr[j + 1]) {");
+        currentView.addView(tView2);
+        TextView tView3 = new TextView(this);
+        tView3.setText("             int tmp = arr[j];\n" +
+                "                    arr[j] = arr[j+1];\n" +
+                "                    arr[j+1] = tmp;");
+        currentView.addView(tView3);
 
-
+    }
 
     //support Methods
     public void swapView(final int index1, final int index2, final LinearLayout currentView){
@@ -283,7 +310,6 @@ public class sortingAlgorithms extends AppCompatActivity {
                     }
                 }
                 currentView.requestLayout();
-
             }
             });
     }
@@ -297,6 +323,17 @@ public class sortingAlgorithms extends AppCompatActivity {
             }
         });
     }
+    public void highLightCode(final int index, final boolean isHighLight, final LinearLayout currentView){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                View view = currentView.getChildAt(index);
+                if(view != null)
+                    view.setBackgroundColor(isHighLight ? Color.YELLOW : Color.TRANSPARENT);
+            }
+        });
+    }
+
     public void addView(final int position, final int[] arrView, final LinearLayout currentView){
         runOnUiThread(new Runnable() {
             @Override
