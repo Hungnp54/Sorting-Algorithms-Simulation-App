@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,30 +25,30 @@ public class sortingAlgorithms extends AppCompatActivity {
         return arrayValue;
     }
 
-    public void testDemo(final int method, final int[] arr, final int left, final int right, final LinearLayout currentView1, final LinearLayout currentView2){
+    public void testDemo(final int method, final int[] arr, final int left, final int right, final LinearLayout currentView, final LinearLayout codeView){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 switch (method) {
                     case 1:
-
-                        quickSort(arr, left, right, currentView1);
+                        quickSort(arr, left, right, currentView);
                         break;
                     case 2:
-                        selectionSort(arr, currentView1);
+                        selectionSort(arr, currentView);
                         break;
                     case 3:
-                        mergeSort(arr, left, right, currentView1);
+                        addMergeSortCode(codeView);
+                        mergeSort(arr, left, right, currentView);
                         break;
                     case 4:
-                        addBubbleSortCode(currentView2);
-                        bubbleSort(arr, currentView1, currentView2);
+                        addBubbleSortCode(codeView);
+                        bubbleSort(arr, currentView, codeView);
                         break;
                     case 5:
-                        insertionSort(arr, currentView1);
+                        addInsertionSortCode(codeView);
+                        insertionSort(arr, currentView,codeView);
                         break;
                 }
-
             }
         });
         thread.start();
@@ -74,11 +75,7 @@ public class sortingAlgorithms extends AppCompatActivity {
                 highLight(i, true,currentView);
                 highLight(j, true,currentView);
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                wait(1000);
                // swapNumber(arr[i],arr[j]);
                 int temp = arr[i];
                 arr[i] = arr[j];
@@ -113,11 +110,7 @@ public class sortingAlgorithms extends AppCompatActivity {
                     highLight(i, true,currentView);
                     highLight(min, true,currentView);
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                   wait(2000);
                     int temp = arr[i];
                     arr[i] = arr[min];
                     arr[min] = temp;
@@ -150,7 +143,6 @@ public class sortingAlgorithms extends AppCompatActivity {
                         viewTemp[k] = i;
                         k++;
                         i++;
-
                     }
                     else{
                         arrTemp[k]=arr[j];
@@ -159,7 +151,6 @@ public class sortingAlgorithms extends AppCompatActivity {
                         j++;
                     }
                 }
-
                 while(i<middle+1){
                     arrTemp[k]=arr[i];
                     viewTemp[k] = i;
@@ -178,63 +169,136 @@ public class sortingAlgorithms extends AppCompatActivity {
                     i++;
                     highLight(viewTemp[k], true,currentView);
                 }
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        wait(1000);
         for(k=0; k<(right-left+1); k++){
-
             highLight(viewTemp[k], false,currentView);
         }
-
                 addView(left, viewTemp,currentView);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        wait(1000);
     }
+    @SuppressLint("SetTextI18n")
+    public void addMergeSortCode(LinearLayout currentView){
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-    public void insertionSort(int[] arr, LinearLayout currentView){
+        TextView tView1 = new TextView(this);
+        tView1.setText(""+"void mergeSort(int[] arr, int left, int right){\n"+"    //At the beginning left = 0 and right = arr.length -1\n"+"    if(left < right){");
+        TextView tView2 = new TextView(this);
+        tView2.setText("        int middle = (left + right)/2;\n"+
+                       "        mergeSort(arr, left, middle);\n"+
+                       "        mergeSort(arr, middle+1, right);");
+
+        TextView tView3 = new TextView(this);
+        tView3.setText("        Merge(arr, left, middle, right);\n"+
+                "    }\n"+
+                "}\n");
+
+        TextView tView4 = new TextView(this);
+        tView4.setText("public void merge(int[] arr, int left, int middle, int right){\n" +
+                "\n" +
+                "                int[] arrTemp = new int[right-left+1];\n"+
+                "                int i, j, k =0;\n" +
+                "                i = left;\n" +
+                "                j=middle+1;\n" +
+                "                while((i<middle+1)&&(j<right+1)){\n" +
+                "                    if(arr[i]<arr[j]){\n" +
+                "                        arrTemp[k] = arr[i];\n" +
+                "                        k++;\n" +
+                "                        i++;\n" +
+                "                    }\n" +
+                "                    else{\n" +
+                "                        arrTemp[k]=arr[j];\n" +
+                "                        k++;\n" +
+                "                        j++;\n" +
+                "                    }\n" +
+                "                }\n" +
+                "                while(i<middle+1){\n" +
+                "                    arrTemp[k]=arr[i];\n" +
+                "                    k++;\n" +
+                "                    i++;\n" +
+                "                }\n" +
+                "                while(j<right+1){\n" +
+                "                    arrTemp[k]=arr[j];\n" +
+                "                    k++;\n" +
+                "                    j++;\n" +
+                "                }\n" +
+                "                i = left;\n" +
+                "                for(k=0; k<(right-left+1); k++){\n" +
+                "                    arr[i] = arrTemp[k];\n" +
+                "                    i++;\n" +
+                "                }\n"+
+                "    }");
+        tView1.setLayoutParams(p);
+        tView2.setLayoutParams(p);
+        tView3.setLayoutParams(p);
+        tView4.setLayoutParams(p);
+        currentView.addView(tView1);
+        currentView.addView(tView2);
+        currentView.addView(tView3);
+        currentView.addView(tView4);
+    }
+    public void insertionSort(int[] arr, LinearLayout currentView, LinearLayout codeView){
         int i, key, j;
         for (i = 1; i < arr.length; i++){
             key = arr[i];
             j = i - 1;
             highLight(j, true,currentView);
             highLight(j+1, true,currentView);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            highLightCode(2,true,codeView);
+            wait(1000);
+            highLightCode(2,false,codeView);
             while (j >= 0 && arr[j] > key){
                 arr[j + 1] = arr[j];
                 highLight(j, true,currentView);
                 highLight(j+1, true,currentView);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                highLightCode(3,true,codeView);
+                wait(1000);
+                highLightCode(3,false,codeView);
                 swapView(j, j+1, currentView);
                 highLight(j, false,currentView);
                 highLight(j+1, false,currentView);
                 j--;
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                wait(1000);
+                highLightCode(3,false,codeView);
             }
-
+            highLightCode(4,true,codeView);
             highLight(j, false,currentView);
             highLight(j+1, false,currentView);
             arr[j + 1] = key;
+            wait(1000);
+            highLightCode(4,false,codeView);
+
         }
     }
+    @SuppressLint("SetTextI18n")
+    public void addInsertionSortCode(LinearLayout codeView){
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TextView tView1 = new TextView(this);
+        tView1.setText("int i, key, j;\n" + "for (i = 1; i < arr.length; i++){");
 
-    public void bubbleSort(int[] arr, LinearLayout currentView, LinearLayout currentView2){
+        TextView tView2 = new TextView(this);
+        tView2.setText("    key = arr[i];\n" +
+                "    j = i - 1;");
+
+        TextView tView3 = new TextView(this);
+        tView3.setText("    while (j >= 0 && arr[j] > key){\n" +
+                "        arr[j + 1] = arr[j];\n"+
+                "        j--;\n"+
+                "    }");
+
+        TextView tView4 = new TextView(this);
+        tView4.setText("    arr[j + 1] = key;\n" +
+                "}");
+
+        tView1.setLayoutParams(p);
+        tView2.setLayoutParams(p);
+        tView3.setLayoutParams(p);
+        tView4.setLayoutParams(p);
+        codeView.addView(tView1);
+        codeView.addView(tView2);
+        codeView.addView(tView3);
+        codeView.addView(tView4);
+    }
+    public void bubbleSort(int[] arr, LinearLayout currentView, LinearLayout codeView){
         int i, j;
         int n = arr.length;
         for (i = 0; i < n-1; i++)
@@ -243,48 +307,52 @@ public class sortingAlgorithms extends AppCompatActivity {
                 if (arr[j] > arr[j + 1]) {
                     highLight(j, true,currentView);
                     highLight(j+1, true,currentView);
-                    highLightCode(2,true,currentView2);
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    highLightCode(2,false,currentView2);
-                    highLightCode(3,true,currentView2);
+                    highLightCode(2,true,codeView);
+                    wait(1000);
+                    highLightCode(2,false,codeView);
+                    highLightCode(3,true,codeView);
                     int tmp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = tmp;
                     swapView(j, j+1, currentView);
                     highLight(j, false,currentView);
                     highLight(j+1, false,currentView);
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    highLightCode(3,false,currentView2);
+                    wait(1000);
+                    highLightCode(3,false,codeView);
                 }
             }
     }
-
     @SuppressLint("SetTextI18n")
     public void addBubbleSortCode(LinearLayout currentView){
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
         TextView tView1 = new TextView(this);
-        tView1.setText(" "+"int i, j;\n"+"int n = arr.length;\n"+"// Last i elements are already in place\n"+"for (i = 0; i < n-1; i++)");
-        currentView.addView(tView1);
+        tView1.setText(""+"int i, j;\n"+"int n = arr.length;\n"+"for (i = 0; i < n-1; i++)");
         TextView tView2 = new TextView(this);
-        tView2.setText(" "+"\tfor (j = 0; j < n-i-1; j++) {\n" +
-                "                if (arr[j] > arr[j + 1]) {");
-        currentView.addView(tView2);
+        tView2.setText("    "+"for (j = 0; j < n-i-1; j++) {\n" +
+                "        if (arr[j] > arr[j + 1]) {");
+
         TextView tView3 = new TextView(this);
-        tView3.setText("             int tmp = arr[j];\n" +
-                "                    arr[j] = arr[j+1];\n" +
-                "                    arr[j+1] = tmp;");
+        tView3.setText("            int tmp = arr[j];\n" +
+                "            arr[j] = arr[j+1];\n" +
+                "            arr[j+1] = tmp;\n"+
+                "        }\n"+
+                "    }");
+        tView1.setLayoutParams(p);
+        tView2.setLayoutParams(p);
+        tView3.setLayoutParams(p);
+        currentView.addView(tView1);
+        currentView.addView(tView2);
         currentView.addView(tView3);
-
     }
-
     //support Methods
+    public void wait(int tmp){
+        try {
+            Thread.sleep(tmp);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     public void swapView(final int index1, final int index2, final LinearLayout currentView){
         runOnUiThread(new Runnable() {
             @Override
@@ -333,7 +401,6 @@ public class sortingAlgorithms extends AppCompatActivity {
             }
         });
     }
-
     public void addView(final int position, final int[] arrView, final LinearLayout currentView){
         runOnUiThread(new Runnable() {
             @Override

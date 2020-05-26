@@ -1,9 +1,6 @@
 package com.example.bachelorthesisversion1anh;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,8 +40,7 @@ public class landscapeView extends sortingAlgorithms {
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void drawViews(int[] viewHeight, int viewWidth) {
-        for (int i = 0; i < viewHeight.length; i++) {
-            int number = viewHeight[i];
+        for (int number : viewHeight) {
             View view = LayoutInflater.from(landscapeView.this).inflate(R.layout.item_number, null, false);
             view.setBackgroundColor(Color.BLUE);
             LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(viewWidth, number);

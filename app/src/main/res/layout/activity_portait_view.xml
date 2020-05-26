@@ -27,4 +27,12 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button"
         android:text="Start" />
+    <LinearLayout
+        android:id="@+id/portraitCodeView"
+        android:orientation="horizontal"
+        android:layout_below="@id/portraitStartButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
 </RelativeLayout>

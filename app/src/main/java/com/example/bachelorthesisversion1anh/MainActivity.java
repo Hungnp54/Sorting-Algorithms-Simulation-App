@@ -7,12 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import java.util.Random;
-
 public class MainActivity extends AppCompatActivity {
     RadioGroup radioSelection, radioView;
     EditText numberOfElement;
@@ -78,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 }if(tmp2==0){
                     Toast.makeText(MainActivity.this,"Please select View",Toast.LENGTH_SHORT).show();
                 }
-                if(numberElement.isEmpty()==false&&tmp1!=0&&tmp2!=0){
+                if(!numberElement.isEmpty() &&tmp1!=0&&tmp2!=0){
                     int number = Integer.parseInt(numberElement);
                     if(tmp2==1){
                         Intent intent = new Intent(MainActivity.this, portaitView.class);
