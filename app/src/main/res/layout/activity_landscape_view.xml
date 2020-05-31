@@ -22,21 +22,35 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/landscapeCode"
+        android:id="@+id/landscapeCod"
         android:layout_weight="5"
         android:layout_toRightOf="@id/landscapeView"
         android:layout_width="0dp"
         android:layout_marginLeft="13dp"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:text="Main Code of Algorithm" />
+            android:text="Main Code of Algorithm"
+            android:textSize="25dp" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@id/landscapeCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
     </LinearLayout>
 
     <LinearLayout

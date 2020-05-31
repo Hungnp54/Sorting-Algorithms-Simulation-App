@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 public class landscapeView extends sortingAlgorithms {
     private LinearLayout landscapeView, landscapeCode;
     private Button lsStart;
+    private ScrollView codeView;
     int[] arr;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -22,6 +24,7 @@ public class landscapeView extends sortingAlgorithms {
         landscapeView = (LinearLayout) findViewById(R.id.landscapeView);
         landscapeCode = (LinearLayout) findViewById(R.id.landscapeCode);
         lsStart = (Button) findViewById(R.id.lsStartButton);
+        //codeView = (ScrollView) findViewById(R.id.scrollView);
 
         int numberElement = getIntent().getIntExtra("number element",1);
         final int sortingAl = getIntent().getIntExtra("sorting alogrithm",1);

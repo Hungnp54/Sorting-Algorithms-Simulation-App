@@ -2,16 +2,11 @@ package com.example.bachelorthesisversion1anh;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.text.Layout;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Random;
 
 public class sortingAlgorithms extends AppCompatActivity {
@@ -31,14 +26,16 @@ public class sortingAlgorithms extends AppCompatActivity {
             public void run() {
                 switch (method) {
                     case 1:
-                        quickSort(arr, left, right, currentView);
+                        addQuickSortCode(codeView);
+                        quickSort(arr, left, right, currentView, codeView);
                         break;
                     case 2:
-                        selectionSort(arr, currentView);
+                        addSelectionSortCode(codeView);
+                        selectionSort(arr, currentView, codeView);
                         break;
                     case 3:
                         addMergeSortCode(codeView);
-                        mergeSort(arr, left, right, currentView);
+                        mergeSort(arr, left, right, currentView, codeView);
                         break;
                     case 4:
                         addBubbleSortCode(codeView);
@@ -56,7 +53,7 @@ public class sortingAlgorithms extends AppCompatActivity {
 
 
     //Sorting Algorithms
-    public void quickSort(int[] arr, int left, int right, LinearLayout currentView){
+    public void quickSort(int[] arr, int left, int right, LinearLayout currentView, LinearLayout codeView){
         if(arr==null || arr.length == 0)
             return;
         if(left >= right)
@@ -74,62 +71,142 @@ public class sortingAlgorithms extends AppCompatActivity {
             if(i<=j){
                 highLight(i, true,currentView);
                 highLight(j, true,currentView);
+                highLightCode(2, true, codeView);
+
 
                 wait(1000);
                // swapNumber(arr[i],arr[j]);
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
-
+                highLightCode(2, false, codeView);
+                highLightCode(3,true, codeView);
                 highLight(i, false,currentView);
                 highLight(j, false,currentView);
-
                 swapView(i, j, currentView);
-
                 i++;
                 j--;
+                wait(1000);
             }
         }
-
+        highLightCode(3,false, codeView);
         if(left < j)
-            quickSort(arr,left,j,currentView);
+            quickSort(arr,left,j,currentView, codeView);
         if(right > i)
-            quickSort(arr, i, right, currentView);
+            quickSort(arr, i, right, currentView, codeView);
 
     }
-    public void selectionSort(int[] arr, LinearLayout currentView){
+    @SuppressLint("SetTextI18n")
+    public void addQuickSortCode(LinearLayout currentView){
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        TextView tView1 = new TextView(this);
+        tView1.setText(""+"public void quickSort(int[] arr, int left, int right){\n"+
+                "    int middle = left + (right -left)/2;\n"+
+                "    int pivot = arr[middle];\n" +
+                "    int i = left, j = right;");
+        TextView tView2 = new TextView(this);
+        tView2.setText("    "+"while (i <= j) {\n" +
+                "        while(arr[i] < pivot) {\n"+
+                "            i++;\n"+
+                "        }\n"+
+                "        while(arr[j] > pivot) {\n"+
+                "            j--;\n"+
+                "        }");
+
+        TextView tView3 = new TextView(this);
+        tView3.setText("        if(i <= j) {\n" +
+                "            int temp = arr[i];\n" +
+                "            arr[i] = arr[j];\n"+
+                "            arr[j] = temp;\n"+
+                "            i++;\n"+
+                "            j--;\n" +
+                "        }");
+
+        TextView tView4 = new TextView(this);
+        tView4.setText("    if(left < j)\n"+
+                "        quickSort(arr, left, j);\n"+
+                "    if(right > i)\n"+
+                "        quickSort(arr, i, right)\n"+
+                "}");
+        tView1.setLayoutParams(p);
+        tView2.setLayoutParams(p);
+        tView3.setLayoutParams(p);
+        tView4.setLayoutParams(p);
+        currentView.addView(tView1);
+        currentView.addView(tView2);
+        currentView.addView(tView3);
+        currentView.addView(tView4);
+    }
+    public void selectionSort(int[] arr, LinearLayout currentView, LinearLayout codeView){
         int tmp = arr.length;
-        for (int i=0; i < tmp-1; i++){
+        for (int i=0; i < tmp-1; i++) {
             int min = i;
-            for(int j=i+1 ; j < tmp ; j++ ) {
+            for (int j = i + 1; j < tmp; j++) {
                 if (arr[j] < arr[min])
                     min = j;
             }
 
-                    //swapNumber(arr[i], arr[min]);
-                    highLight(i, true,currentView);
-                    highLight(min, true,currentView);
+            //swapNumber(arr[i], arr[min]);
+            highLight(i, true, currentView);
+            highLight(min, true, currentView);
+            highLightCode(3, true, codeView);
 
-                   wait(2000);
-                    int temp = arr[i];
-                    arr[i] = arr[min];
-                    arr[min] = temp;
-                    highLight(i, false,currentView);
-                    highLight(min, false,currentView);
-                    swapView(i, min, currentView);
+            wait(2000);
+            int temp = arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp;
+            highLightCode(3, false, codeView);
+            highLight(i, false, currentView);
+            highLight(min, false, currentView);
+            swapView(i, min, currentView);
+            highLightCode(4, true, codeView);
+            wait(1000);
+            highLightCode(4, false, codeView);
         }
 
     }
+    @SuppressLint("SetTextI18n")
+    public void addSelectionSortCode(LinearLayout currentView){
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-    public void mergeSort(int[] arr, int left, int right, LinearLayout currentView){
+        TextView tView1 = new TextView(this);
+        tView1.setText(""+"public void selectionSort(int[] arr){\n"+
+                "    int tmp = arr.length;");
+        TextView tView2 = new TextView(this);
+        tView2.setText("    "+"for (int i=0; i < tmp-1; i++) {\n" +
+                "        int min = i;");
+
+        TextView tView3 = new TextView(this);
+        tView3.setText("        for (int j = i + 1; j < tmp; j++) {\n" +
+                "            if (arr[j] < arr[min])\n" +
+                "                min = j;\n"+
+                "        }");
+
+        TextView tView4 = new TextView(this);
+        tView4.setText("        int temp = arr[i];\n"+
+                "        arr[i] = arr[min];\n"+
+                "        arr[min] = temp;\n"+
+                "    }\n"+
+                "}");
+        tView1.setLayoutParams(p);
+        tView2.setLayoutParams(p);
+        tView3.setLayoutParams(p);
+        tView4.setLayoutParams(p);
+        currentView.addView(tView1);
+        currentView.addView(tView2);
+        currentView.addView(tView3);
+        currentView.addView(tView4);
+    }
+    public void mergeSort(int[] arr, int left, int right, LinearLayout currentView, LinearLayout codeView){
         if(left<right){
             int middle = (left+right)/2;
-            mergeSort(arr, left, middle, currentView);
-            mergeSort(arr,middle+1, right, currentView);
-            merge(arr,left,middle,right,currentView);
+            mergeSort(arr, left, middle, currentView, codeView);
+            mergeSort(arr,middle+1, right, currentView, codeView);
+            merge(arr,left,middle,right,currentView, codeView);
         }
     }
-    public void merge(int[] arr, int left, int middle, int right, LinearLayout currentView){
+    public void merge(int[] arr, int left, int middle, int right, LinearLayout currentView, LinearLayout codeView){
 
                 int[] arrTemp = new int[right-left+1];
                 int[] viewTemp = new int[right-left+1];
@@ -298,7 +375,7 @@ public class sortingAlgorithms extends AppCompatActivity {
         codeView.addView(tView3);
         codeView.addView(tView4);
     }
-    public void bubbleSort(int[] arr, LinearLayout currentView, LinearLayout codeView){
+    public void bubbleSort(int[] arr, LinearLayout currentView,LinearLayout codeView){
         int i, j;
         int n = arr.length;
         for (i = 0; i < n-1; i++)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent" android:layout_width="match_parent"
     android:background="@drawable/background3"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -27,12 +28,19 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button"
         android:text="Start" />
-    <LinearLayout
-        android:id="@+id/portraitCodeView"
-        android:orientation="horizontal"
+
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_below="@id/portraitStartButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:ignore="InvalidId">
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/portraitCodeView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
 </RelativeLayout>
