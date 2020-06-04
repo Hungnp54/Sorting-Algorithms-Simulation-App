@@ -71,30 +71,31 @@ public class sortingAlgorithms extends AppCompatActivity {
             if(i<=j){
                 highLight(i, true,currentView);
                 highLight(j, true,currentView);
+                highLightCode(1, true, codeView);
                 highLightCode(2, true, codeView);
-
 
                 wait(1000);
                // swapNumber(arr[i],arr[j]);
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
+                highLightCode(1, false, codeView);
                 highLightCode(2, false, codeView);
-                highLightCode(3,true, codeView);
                 highLight(i, false,currentView);
                 highLight(j, false,currentView);
                 swapView(i, j, currentView);
                 i++;
                 j--;
-                wait(1000);
             }
         }
+        wait(1000);
+        highLightCode(3,true, codeView);
+        wait(1000);
         highLightCode(3,false, codeView);
         if(left < j)
             quickSort(arr,left,j,currentView, codeView);
         if(right > i)
             quickSort(arr, i, right, currentView, codeView);
-
     }
     @SuppressLint("SetTextI18n")
     public void addQuickSortCode(LinearLayout currentView){
@@ -150,19 +151,19 @@ public class sortingAlgorithms extends AppCompatActivity {
             //swapNumber(arr[i], arr[min]);
             highLight(i, true, currentView);
             highLight(min, true, currentView);
-            highLightCode(3, true, codeView);
+            highLightCode(2, true, codeView);
 
             wait(2000);
             int temp = arr[i];
             arr[i] = arr[min];
             arr[min] = temp;
-            highLightCode(3, false, codeView);
+            highLightCode(2, false, codeView);
             highLight(i, false, currentView);
             highLight(min, false, currentView);
             swapView(i, min, currentView);
-            highLightCode(4, true, codeView);
+            highLightCode(3, true, codeView);
             wait(1000);
-            highLightCode(4, false, codeView);
+            highLightCode(3, false, codeView);
         }
 
     }
@@ -245,13 +246,17 @@ public class sortingAlgorithms extends AppCompatActivity {
                     arr[i] = arrTemp[k];
                     i++;
                     highLight(viewTemp[k], true,currentView);
+                    highLightCode(1,true, codeView);
                 }
         wait(1000);
+                highLightCode(1, false,codeView);
         for(k=0; k<(right-left+1); k++){
             highLight(viewTemp[k], false,currentView);
+            highLightCode(2,true, codeView);
         }
                 addView(left, viewTemp,currentView);
         wait(1000);
+        highLightCode(2, false, codeView);
     }
     @SuppressLint("SetTextI18n")
     public void addMergeSortCode(LinearLayout currentView){
@@ -267,7 +272,7 @@ public class sortingAlgorithms extends AppCompatActivity {
         TextView tView3 = new TextView(this);
         tView3.setText("        Merge(arr, left, middle, right);\n"+
                 "    }\n"+
-                "}\n");
+                "}");
 
         TextView tView4 = new TextView(this);
         tView4.setText("public void merge(int[] arr, int left, int middle, int right){\n" +
@@ -320,29 +325,29 @@ public class sortingAlgorithms extends AppCompatActivity {
             j = i - 1;
             highLight(j, true,currentView);
             highLight(j+1, true,currentView);
-            highLightCode(2,true,codeView);
+            highLightCode(1,true,codeView);
             wait(1000);
-            highLightCode(2,false,codeView);
+            highLightCode(1,false,codeView);
             while (j >= 0 && arr[j] > key){
                 arr[j + 1] = arr[j];
                 highLight(j, true,currentView);
                 highLight(j+1, true,currentView);
-                highLightCode(3,true,codeView);
+                highLightCode(2,true,codeView);
                 wait(1000);
-                highLightCode(3,false,codeView);
+                highLightCode(2,false,codeView);
                 swapView(j, j+1, currentView);
                 highLight(j, false,currentView);
                 highLight(j+1, false,currentView);
                 j--;
                 wait(1000);
-                highLightCode(3,false,codeView);
+                highLightCode(2,false,codeView);
             }
-            highLightCode(4,true,codeView);
+            highLightCode(3,true,codeView);
             highLight(j, false,currentView);
             highLight(j+1, false,currentView);
             arr[j + 1] = key;
             wait(1000);
-            highLightCode(4,false,codeView);
+            highLightCode(3,false,codeView);
 
         }
     }
@@ -384,10 +389,10 @@ public class sortingAlgorithms extends AppCompatActivity {
                 if (arr[j] > arr[j + 1]) {
                     highLight(j, true,currentView);
                     highLight(j+1, true,currentView);
-                    highLightCode(2,true,codeView);
+                    highLightCode(1,true,codeView);
                     wait(1000);
-                    highLightCode(2,false,codeView);
-                    highLightCode(3,true,codeView);
+                    highLightCode(1,false,codeView);
+                    highLightCode(2,true,codeView);
                     int tmp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = tmp;
@@ -395,7 +400,7 @@ public class sortingAlgorithms extends AppCompatActivity {
                     highLight(j, false,currentView);
                     highLight(j+1, false,currentView);
                     wait(1000);
-                    highLightCode(3,false,codeView);
+                    highLightCode(2,false,codeView);
                 }
             }
     }
@@ -464,7 +469,7 @@ public class sortingAlgorithms extends AppCompatActivity {
             public void run() {
                 View view = currentView.getChildAt(index);
                 if(view != null)
-                    view.setBackgroundColor(isHighLight ? Color.RED : Color.GREEN);
+                    view.setBackgroundColor(isHighLight ? Color.parseColor("#C70E3F") : Color.parseColor("#04B925"));
             }
         });
     }

@@ -14,7 +14,7 @@
         android:textSize="20dp"
         android:textColor="#F6F7FA"
         android:layout_marginTop="10dp"
-        android:text="Select Sorting Alogrithm"
+        android:text="@string/select_sorting_alogrithm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

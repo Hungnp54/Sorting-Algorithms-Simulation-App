@@ -47,7 +47,7 @@ public class portaitView extends sortingAlgorithms {
     public void drawViews(int[] viewHeight, int viewWidth){
         for (int number : viewHeight) {
             View view = LayoutInflater.from(portaitView.this).inflate(R.layout.item_number, null, false);
-            view.setBackgroundColor(Color.BLUE);
+            view.setBackgroundColor(Color.parseColor("#0277bd"));
             LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(viewWidth, number);
             p.setMarginEnd(1);
             view.setLayoutParams(p);

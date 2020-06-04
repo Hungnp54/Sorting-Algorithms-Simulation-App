@@ -1,9 +1,13 @@
 package com.example.bachelorthesisversion1anh;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -94,5 +98,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    public void dialog(){
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog);
+        Button okButton = (Button) dialog.findViewById(R.id.button4);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuHelp:
+                dialog();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
