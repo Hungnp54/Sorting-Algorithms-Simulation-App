@@ -143,23 +143,25 @@ public class sortingAlgorithms extends AppCompatActivity {
         int tmp = arr.length;
         for (int i=0; i < tmp-1; i++) {
             int min = i;
+            highLight(i, true, currentView);
+            wait(1000);
             for (int j = i + 1; j < tmp; j++) {
                 if (arr[j] < arr[min])
                     min = j;
             }
 
-            //swapNumber(arr[i], arr[min]);
-            highLight(i, true, currentView);
             highLight(min, true, currentView);
             highLightCode(2, true, codeView);
-
             wait(2000);
+
             int temp = arr[i];
             arr[i] = arr[min];
             arr[min] = temp;
+
             highLightCode(2, false, codeView);
             highLight(i, false, currentView);
             highLight(min, false, currentView);
+
             swapView(i, min, currentView);
             highLightCode(3, true, codeView);
             wait(1000);

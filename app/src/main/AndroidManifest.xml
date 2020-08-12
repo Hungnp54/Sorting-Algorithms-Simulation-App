@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".OpenActivity"
-            android:label="Subject Selection"
-            >
+            android:label="Subject Selection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,14 +20,9 @@
 
         <activity
             android:name=".landscapeView"
-            android:screenOrientation="fullSensor"></activity>
+            android:screenOrientation="landscape"></activity>
         <activity android:name=".portaitView" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
