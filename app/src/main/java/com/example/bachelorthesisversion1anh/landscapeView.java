@@ -28,6 +28,7 @@ public class landscapeView extends sortingAlgorithms {
 
         int numberElement = getIntent().getIntExtra("number element",1);
         final int sortingAl = getIntent().getIntExtra("sorting alogrithm",1);
+        //Draw View
         int scrHeight = screenDemension.getScreenHeight()-200;
         arr = generateArrayValue(scrHeight,numberElement);
         int viewWidth = (screenDemension.getScreenWidth())/(2*arr.length);
@@ -36,7 +37,7 @@ public class landscapeView extends sortingAlgorithms {
         lsStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testDemo(sortingAl, arr, 0, arr.length-1, landscapeView, landscapeCode);
+                runProgram(sortingAl, arr, 0, arr.length-1, landscapeView, landscapeCode);
                 lsStart.setVisibility(View.GONE);
             }
         });

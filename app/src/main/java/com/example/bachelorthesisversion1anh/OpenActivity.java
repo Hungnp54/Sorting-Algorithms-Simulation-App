@@ -21,7 +21,7 @@ public class OpenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open);
 
         inputSubject();
-
+         //Adapter
         adapter = new SubjectAdapter(this,R.layout.subject_line, arraySubject);
         listSubject.setAdapter(adapter);
 
@@ -44,7 +44,7 @@ public class OpenActivity extends AppCompatActivity {
         });
 
     }
-
+// input info of subjects
     private void inputSubject(){
         listSubject = (ListView) findViewById(R.id.ListSubject);
         arraySubject = new ArrayList<>();

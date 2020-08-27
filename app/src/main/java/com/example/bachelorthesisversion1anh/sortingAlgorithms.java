@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
 public class sortingAlgorithms extends AppCompatActivity {
+    //Method to generate a random array based on maximum height of bars and number of elements
     public int[] generateArrayValue(int layoutHeight, int numberElement){
         int[] arrayValue = new int[numberElement];
         int min = 10;
@@ -19,8 +20,8 @@ public class sortingAlgorithms extends AppCompatActivity {
         }
         return arrayValue;
     }
-
-    public void testDemo(final int method, final int[] arr, final int left, final int right, final LinearLayout currentView, final LinearLayout codeView){
+//main method to run program
+    public void runProgram(final int method, final int[] arr, final int left, final int right, final LinearLayout currentView, final LinearLayout codeView){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -51,8 +52,7 @@ public class sortingAlgorithms extends AppCompatActivity {
         thread.start();
     }
 
-
-    //Sorting Algorithms
+    //Sorting Algorithms and code View
     public void quickSort(int[] arr, int left, int right, LinearLayout currentView, LinearLayout codeView){
         if(arr==null || arr.length == 0)
             return;
@@ -61,6 +61,8 @@ public class sortingAlgorithms extends AppCompatActivity {
         int middle = left + (right - left)/2;
         int pivot = arr[middle];
         int i=left, j=right;
+        highLight(middle,true, currentView);
+
         while (i <= j){
             while(arr[i]<pivot) {
                 i++;
@@ -69,6 +71,7 @@ public class sortingAlgorithms extends AppCompatActivity {
                 j--;
             }
             if(i<=j){
+                wait(1000);
                 highLight(i, true,currentView);
                 highLight(j, true,currentView);
                 highLightCode(1, true, codeView);
@@ -90,8 +93,10 @@ public class sortingAlgorithms extends AppCompatActivity {
         }
         wait(1000);
         highLightCode(3,true, codeView);
+        highLight(middle,false,currentView);
         wait(1000);
         highLightCode(3,false, codeView);
+
         if(left < j)
             quickSort(arr,left,j,currentView, codeView);
         if(right > i)
@@ -148,21 +153,22 @@ public class sortingAlgorithms extends AppCompatActivity {
             for (int j = i + 1; j < tmp; j++) {
                 if (arr[j] < arr[min])
                     min = j;
-            }
 
+            }
             highLight(min, true, currentView);
+
             highLightCode(2, true, codeView);
-            wait(2000);
+            wait(1000);
 
             int temp = arr[i];
             arr[i] = arr[min];
             arr[min] = temp;
 
+            swapView(i, min, currentView);
             highLightCode(2, false, codeView);
             highLight(i, false, currentView);
             highLight(min, false, currentView);
 
-            swapView(i, min, currentView);
             highLightCode(3, true, codeView);
             wait(1000);
             highLightCode(3, false, codeView);
@@ -325,8 +331,8 @@ public class sortingAlgorithms extends AppCompatActivity {
         for (i = 1; i < arr.length; i++){
             key = arr[i];
             j = i - 1;
-            highLight(j, true,currentView);
-            highLight(j+1, true,currentView);
+            highLight(i, true,currentView);
+           // highLight(j+1, true,currentView);
             highLightCode(1,true,codeView);
             wait(1000);
             highLightCode(1,false,codeView);
@@ -429,6 +435,7 @@ public class sortingAlgorithms extends AppCompatActivity {
         currentView.addView(tView2);
         currentView.addView(tView3);
     }
+
     //support Methods
     public void wait(int tmp){
         try {

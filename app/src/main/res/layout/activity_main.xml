@@ -14,7 +14,7 @@
         android:textSize="25dp"
         android:textColor="#F6F7FA"
         android:layout_marginTop="18dp"
-        android:text="Select Sorting Alogrithm"
+        android:text="Select Sorting Algorithm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +82,7 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/custom_text"
         android:ems="10"
-        android:hint="number > 3"
+        android:hint="@string/_3_number"
         android:inputType="numberDecimal"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"

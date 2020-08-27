@@ -33,16 +33,16 @@ public class portaitView extends sortingAlgorithms {
         int viewWidth = (screenDemension.getScreenWidth())/arr.length-1;
         portraitCodeView.setVisibility(View.INVISIBLE);
         drawViews(arr,viewWidth);
-        //
+        //Click Start button to run program
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testDemo(sortingAl,arr, 0,arr.length-1, portraitView, portraitCodeView);
+                runProgram(sortingAl,arr, 0,arr.length-1, portraitView, portraitCodeView);
                 startButton.setVisibility(View.GONE);
             }
         });
     }
-
+//Draw View on Screen
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void drawViews(int[] viewHeight, int viewWidth){
         for (int number : viewHeight) {

@@ -97,12 +97,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+   //Create option menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
+    // Create Dialog
     public void dialog(){
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog);
